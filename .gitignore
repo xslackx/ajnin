@@ -1,0 +1,7 @@
+Dockerfile
+bin
+lib
+lib64
+include
+pyvenv.cfg
+*.zip
