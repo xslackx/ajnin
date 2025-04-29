@@ -5,3 +5,5 @@ lib64
 include
 pyvenv.cfg
 *.zip
+__pycache__
+hub_tools/*[master|main]

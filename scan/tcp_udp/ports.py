@@ -21,7 +21,7 @@ async def socket_scan(host: tuple, options: dict, timeout=60):
                 return False
 
 
-host=("google.com.br", 443)
+host=("localhost", 443)
 
 options = {
     "inet6": True,

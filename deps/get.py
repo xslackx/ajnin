@@ -6,25 +6,38 @@ from urllib.request import (
 from html import unescape
 
 class PopulateHub:
-    def __init__(self, meta) -> None:
+    def __init__(self, meta, download: bool) -> None:
         if meta == False:
-            self.populate()
+            self.populate(download=download)
             return
         else:
             self.meta = meta
             
     def new_tool(self): pass
     def update_tool(self, tool): pass
-    def populate(self):
+    def populate(self, download: bool):
         from deps import fetch
-        for url in fetch.FetchExternal("external.json").get_meta_key(("tools", "git")):
+        if download:
+            for url in fetch.FetchExternal("configs/external.json").get_meta_key(("tools", "git")):
+                try:
+                    if urlopen(url):
+                        tool_name = url.split('/')[-1].replace(".git", "")
+                        with open(f'zips/{tool_name}.zip', 'wb') as new_tool:
+                            master = url.replace(".git", "")
+                            master = url+"/archive/refs/heads/master.zip"
+                            new_tool.write(urlopen(master).read())                    
+                except:
+                    print({"status": "error", "url": f"{url}"})
+        
+        from zipfile import ZipFile
+        from os import listdir, getcwd
+        
+        zip_files = listdir("zips")
+        for file in zip_files:
+            full_path = getcwd()+"/zips/"+f"{file}"
             try:
-                if urlopen(url):
-                    tool_name = url.split('/')[-1].replace(".git", "")
-                    with open(f'zips/{tool_name}.zip', 'wb') as new_tool:
-                        master = url.replace(".git", "")
-                        master = url+"/archive/refs/heads/master.zip"
-                        new_tool.write(urlopen(master).read())
-                    
+                with ZipFile(full_path, 'r') as tool:
+                    tool.extractall(getcwd()+"/hub_tools/")
+                    tool.close()
             except:
-                print(f"status: offline, url: {url}")
+                print({"status": "error", "zip_file": f"{file}"})
