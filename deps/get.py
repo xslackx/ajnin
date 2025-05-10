@@ -1,9 +1,7 @@
-from urllib.request import (
-    urlopen,
-    url2pathname,
-    urlretrieve
-    )
-from html import unescape
+from deps import fetch
+from zipfile import ZipFile
+from os import listdir, getcwd
+from urllib.request import urlopen
 
 class PopulateHub:
     def __init__(self, meta, download: bool) -> None:
@@ -16,7 +14,6 @@ class PopulateHub:
     def new_tool(self): pass
     def update_tool(self, tool): pass
     def populate(self, download: bool):
-        from deps import fetch
         if download:
             for url in fetch.FetchExternal("configs/external.json").get_meta_key(("tools", "git")):
                 try:
@@ -28,9 +25,6 @@ class PopulateHub:
                             new_tool.write(urlopen(master).read())                    
                 except:
                     print({"status": "error", "url": f"{url}"})
-        
-        from zipfile import ZipFile
-        from os import listdir, getcwd
         
         zip_files = listdir("zips")
         for file in zip_files:

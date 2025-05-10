@@ -1,0 +1,25 @@
+21, ftp, File Transfer Protocol
+22, ssh, Secure Shell
+23, telnet, Telnet Service
+25, smtp, Simple Mail Transfer 
+43, whois, Whois Service
+53, domain, Domain Name Service
+79, finger, Finger Service
+80, http, Hypertext Transfer Protocol
+88, kerberos, Kerberos Auth Service
+110, pop3, Post Office Protocol
+111, sunrpc, Portmapper RPC aka RPCbind
+113, auth, Auth Service aka identd
+119, nntp, Network News Transfer Protocol
+135, loc-srv, RPC Microsoft Server
+139, netbios-ssn, Netbios Session Server
+143, imap, Internet Message Access Protocol
+179, bgp, Border Gateway Protocol
+389, ldap, Lightweight Directory Access Protocol
+443, https, Hypertext Encapsuled with TLS
+445, cifs, SMB Direct
+464, kerberos, Password Service of Kerberos
+465, smtps, Simple Mail Encapsuled with TLS
+513, login, Remote Login aka in.rlogind
+514, shell, Remote Shell aka in.rshd
+515, printer, Line Printer Daemon

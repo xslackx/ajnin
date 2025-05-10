@@ -6,7 +6,7 @@ from socket import (
     SOCK_DGRAM)
 
     
-async def socket_scan(host: tuple, options: dict, timeout=60):
+def socket_scan(host: tuple, options: dict, timeout=60):
     for option in options.items():
         if option[1] == True and option[0] == "inet6": pass
         if option[1] == True and option[0] == "inet":
@@ -29,7 +29,3 @@ options = {
     "stream": True,
     "dgram": False
 }
-
-import asyncio
-status = asyncio.run(socket_scan(host, options))
-print(status)
